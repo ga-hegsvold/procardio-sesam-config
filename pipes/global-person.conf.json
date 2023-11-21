@@ -1,0 +1,12 @@
+{
+  "_id": "global-person",
+  "type": "pipe",
+  "source": {
+    "type": "merge",
+    "datasets": ["fhir-patient-enrich fpe"],
+    "identity": "first",
+    "if_source_empty": "accept",
+    "strategy": "default",
+    "version": 2
+  }
+}
