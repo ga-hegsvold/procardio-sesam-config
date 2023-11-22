@@ -1,0 +1,64 @@
+{
+  "_id": "fhir-servicerequest-collect",
+  "type": "pipe",
+  "source": {
+    "type": "conditional",
+    "alternatives": {
+      "dev": {
+        "type": "embedded",
+        "entities": [{
+          "category": [{
+            "coding": [{
+              "system": "http://snomed.info/sct",
+              "code": "103693007",
+              "display": "Diagnostic procedure (procedure)"
+            }],
+            "text": "Diagnostics Procedure"
+          }],
+          "code": {
+            "concept": {
+              "coding": [{
+                "system": "http://snomed.info/sct",
+                "code": "303653007",
+                "display": "Computed tomography of head"
+              }]
+            }
+          },
+          "id": "example",
+          "intent": "order",
+          "meta": {
+            "tag": [{
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }]
+          },
+          "resourceType": "ServiceRequest",
+          "status": "completed",
+          "subject": {
+            "reference": "Patient/example"
+          },
+          "text": {
+            "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">To be added</div>",
+            "status": "generated"
+          }
+        }],
+        "if_source_empty": "accept"
+      }
+    },
+    "condition": "$ENV(node-env)"
+  },
+  "transform": {
+    "type": "dtl",
+    "rules": {
+      "default": [
+        ["copy", "*"],
+        ["add", "_id", "_S.id"]
+      ]
+    }
+  },
+  "metadata": {
+    "tags": ["fhir", "collect"]
+  },
+  "remove_namespaces": true
+}

@@ -1,12 +1,9 @@
 {
-  "_id": "global-person",
+  "_id": "global-task",
   "type": "pipe",
   "source": {
     "type": "merge",
-    "datasets": ["fhir-person-enrich f-person", "fhir-patient-enrich f-patient"],
-    "equality_sets": [
-      ["f-person.id", "f-patient.id"]
-    ],
+    "datasets": ["fhir-servicerequest-enrich f-sr", "fhir-imagingstudy-enrich f-is"],
     "identity": "first",
     "if_source_empty": "accept",
     "strategy": "default",

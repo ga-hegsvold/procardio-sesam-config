@@ -1,0 +1,82 @@
+{
+  "_id": "fhir-imagingstudy-collect",
+  "type": "pipe",
+  "source": {
+    "type": "conditional",
+    "alternatives": {
+      "dev": {
+        "type": "embedded",
+        "entities": [{
+          "id": "example",
+          "identifier": [{
+            "system": "urn:dicom:uid",
+            "value": "urn:oid:2.16.124.113543.6003.1154777499.30246.19789.3503430045"
+          }],
+          "meta": {
+            "tag": [{
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }]
+          },
+          "numberOfInstances": 1,
+          "numberOfSeries": 1,
+          "resourceType": "ImagingStudy",
+          "series": [{
+            "bodySite": {
+              "concept": {
+                "coding": [{
+                  "system": "http://snomed.info/sct",
+                  "code": "67734004",
+                  "display": "Upper Trunk Structure"
+                }]
+              }
+            },
+            "description": "CT Surview 180",
+            "instance": [{
+              "number": 1,
+              "sopClass": {
+                "system": "urn:ietf:rfc:3986",
+                "code": "urn:oid:1.2.840.10008.5.1.4.1.1.2"
+              },
+              "uid": "2.16.124.113543.6003.189642796.63084.16748.2599092903"
+            }],
+            "modality": {
+              "coding": [{
+                "system": "http://dicom.nema.org/resources/ontology/DCM",
+                "code": "CT"
+              }]
+            },
+            "number": 3,
+            "numberOfInstances": 1,
+            "uid": "2.16.124.113543.6003.2588828330.45298.17418.2723805630"
+          }],
+          "started": "2011-01-01T11:01:20+03:00",
+          "status": "available",
+          "subject": {
+            "reference": "Patient/dicom"
+          },
+          "text": {
+            "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">CT Chest.  John Smith (MRN: 09236). Accession: W12342398. Performed: 2011-01-01. 3 series, 12 images.</div>",
+            "status": "generated"
+          }
+        }],
+        "if_source_empty": "accept"
+      }
+    },
+    "condition": "$ENV(node-env)"
+  },
+  "transform": {
+    "type": "dtl",
+    "rules": {
+      "default": [
+        ["copy", "*"],
+        ["add", "_id", "_S.id"]
+      ]
+    }
+  },
+  "metadata": {
+    "tags": ["fhir", "collect"]
+  },
+  "remove_namespaces": true
+}

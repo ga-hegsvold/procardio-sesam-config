@@ -1,0 +1,52 @@
+{
+  "_id": "fhir-observation-enrich",
+  "type": "pipe",
+  "source": {
+    "type": "dataset",
+    "dataset": "fhir-observation-collect"
+  },
+  "transform": {
+    "type": "dtl",
+    "rules": {
+      "default": [
+        ["copy", "*"],
+        ["add", "rdf:type",
+          ["ni", "fhir", "_S.resourceType"]
+        ],
+        ["add", "enounter-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.encounter.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.encounter.reference"]
+            ]
+          ]
+        ],
+        ["add", "subject-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.subject.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.subject.reference"]
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "add_namespaces": true,
+  "namespaces": {
+    "identity": "fhir-observation",
+    "property": "fhir-observation"
+  }
+}

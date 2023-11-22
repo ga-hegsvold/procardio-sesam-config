@@ -1,0 +1,38 @@
+{
+  "_id": "fhir-documentreference-enrich",
+  "type": "pipe",
+  "source": {
+    "type": "dataset",
+    "dataset": "fhir-documentreference-collect"
+  },
+  "transform": {
+    "type": "dtl",
+    "rules": {
+      "default": [
+        ["copy", "*"],
+        ["add", "rdf:type",
+          ["ni", "fhir", "_S.resourceType"]
+        ],
+        ["add", "subject-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.subject.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.subject.reference"]
+            ]
+          ]
+        ]
+      ]
+    }
+  },
+  "add_namespaces": true,
+  "namespaces": {
+    "identity": "fhir-documentreference",
+    "property": "fhir-documentreference"
+  }
+}
