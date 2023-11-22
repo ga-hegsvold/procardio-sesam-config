@@ -1,9 +1,9 @@
 {
-  "_id": "fhir-person-enrich",
+  "_id": "fhir-organization-enrich",
   "type": "pipe",
   "source": {
     "type": "dataset",
-    "dataset": "fhir-person-collect"
+    "dataset": "fhir-organization-collect"
   },
   "transform": {
     "type": "dtl",
@@ -21,7 +21,7 @@
   },
   "add_namespaces": true,
   "namespaces": {
-    "identity": "fhir-person",
-    "property": "fhir-person"
+    "identity": "fhir-organization",
+    "property": "fhir-organization"
   }
 }

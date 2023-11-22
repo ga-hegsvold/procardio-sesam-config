@@ -44,6 +44,9 @@
       ]
     }
   },
+  "metadata": {
+    "tags": ["fhir", "enrich"]
+  },
   "add_namespaces": true,
   "namespaces": {
     "identity": "fhir-observation",

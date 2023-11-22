@@ -1,0 +1,6 @@
+{
+  "_id": "fhir",
+  "type": "system:url",
+  "url_pattern": "https://fhir.dummy.url/%s",
+  "verify_ssl": true
+}

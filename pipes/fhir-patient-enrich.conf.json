@@ -12,9 +12,26 @@
         ["copy", "*"],
         ["add", "rdf:type",
           ["ni", "fhir", "_S.resourceType"]
+        ],
+        ["add", "managingOrganization-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.managingOrganization.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.managingOrganization.reference"]
+            ]
+          ]
         ]
       ]
     }
+  },
+  "metadata": {
+    "tags": ["fhir", "enrich"]
   },
   "add_namespaces": true,
   "namespaces": {

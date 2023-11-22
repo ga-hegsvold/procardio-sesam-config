@@ -15,5 +15,9 @@
   "sink": {
     "type": "dataset",
     "indexes": ["$ids"]
+  },
+  "metadata": {
+    "global": true,
+    "tags": ["fhir"]
   }
 }
