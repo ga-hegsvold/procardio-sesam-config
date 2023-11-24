@@ -1,12 +1,9 @@
 {
-  "_id": "global-person",
+  "_id": "global-event",
   "type": "pipe",
   "source": {
     "type": "merge",
-    "datasets": ["fhir-person-enrich f-person", "fhir-patient-enrich f-patient", "fhir-practitioner-enrich f-practitioner"],
-    "equality_sets": [
-      ["f-person.business-id", "f-patient.business-id"]
-    ],
+    "datasets": ["fhir-encounter-enrich f-e"],
     "identity": "first",
     "if_source_empty": "accept",
     "strategy": "default",
@@ -19,5 +16,6 @@
   "metadata": {
     "global": true,
     "tags": ["fhir"]
-  }
+  },
+  "description": "http://hl7.org/fhir/R5/event.html#Event"
 }

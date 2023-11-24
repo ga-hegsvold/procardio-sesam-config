@@ -88,7 +88,17 @@
     "rules": {
       "default": [
         ["copy", "*"],
-        ["add", "_id", "_S.id"]
+        ["add", "_id", "_S.id"],
+        ["add", "business-id",
+          ["first",
+            ["values",
+              ["apply", "identity", "_S.identifier"]
+            ]
+          ]
+        ]
+      ],
+      "identity": [
+        ["add", "_tmp-id", "_S.value"]
       ]
     }
   },

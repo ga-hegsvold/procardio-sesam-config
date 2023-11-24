@@ -1,9 +1,9 @@
 {
-  "_id": "fhir-diagnosticreport-enrich",
+  "_id": "fhir-specimen-enrich",
   "type": "pipe",
   "source": {
     "type": "dataset",
-    "dataset": "fhir-diagnosticreport-collect"
+    "dataset": "fhir-specimen-collect"
   },
   "transform": {
     "type": "dtl",
@@ -13,28 +13,23 @@
         ["add", "rdf:type",
           ["ni", "fhir", "_S.resourceType"]
         ],
-        ["add", "media-ni",
-          ["values",
-            ["apply", "media-links", "_S.media"]
-          ]
-        ],
-        ["add", "performer-ni",
+        ["add", "collector-ni",
           ["ni",
             ["concat", "fhir-",
               ["lower",
                 ["first",
-                  ["split", "/", "_S.performer.reference"]
+                  ["split", "/", "_S.collection.collector.reference"]
                 ]
               ]
             ],
             ["last",
-              ["split", "/", "_S.performer.reference"]
+              ["split", "/", "_S.collection.collector.reference"]
             ]
           ]
         ],
-        ["add", "result-ni",
+        ["add", "request-ni",
           ["values",
-            ["apply", "result", "_S.result"]
+            ["apply", "request", "_S.request"]
           ]
         ],
         ["add", "subject-ni",
@@ -52,23 +47,7 @@
           ]
         ]
       ],
-      "media-links": [
-        ["add", "tmp-ni",
-          ["ni",
-            ["concat", "fhir-",
-              ["lower",
-                ["first",
-                  ["split", "/", "_S.link.reference"]
-                ]
-              ]
-            ],
-            ["last",
-              ["split", "/", "_S.link.reference"]
-            ]
-          ]
-        ]
-      ],
-      "result": [
+      "request": [
         ["add", "tmp-ni",
           ["ni",
             ["concat", "fhir-",
@@ -91,7 +70,7 @@
   },
   "add_namespaces": true,
   "namespaces": {
-    "identity": "fhir-diagnosticreport",
-    "property": "fhir-diagnosticreport"
+    "identity": "fhir-specimen",
+    "property": "fhir-specimen"
   }
 }

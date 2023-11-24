@@ -1,0 +1,27 @@
+{
+  "_id": "fhir-practitioner-enrich",
+  "type": "pipe",
+  "source": {
+    "type": "dataset",
+    "dataset": "fhir-practitioner-collect"
+  },
+  "transform": {
+    "type": "dtl",
+    "rules": {
+      "default": [
+        ["copy", "*"],
+        ["add", "rdf:type",
+          ["ni", "fhir", "_S.resourceType"]
+        ]
+      ]
+    }
+  },
+  "metadata": {
+    "tags": ["fhir", "enrich"]
+  },
+  "add_namespaces": true,
+  "namespaces": {
+    "identity": "fhir-practitioner",
+    "property": "fhir-practitioner"
+  }
+}

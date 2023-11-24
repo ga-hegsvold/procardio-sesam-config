@@ -3,7 +3,7 @@
   "type": "pipe",
   "source": {
     "type": "merge",
-    "datasets": ["fhir-diagnosticreport-enrich f-dr", "fhir-observation-enrich f-o"],
+    "datasets": ["fhir-diagnosticreport-enrich f-dr", "fhir-observation-enrich f-o", "fhir-specimen-enrich f-s"],
     "identity": "first",
     "if_source_empty": "accept",
     "strategy": "default",

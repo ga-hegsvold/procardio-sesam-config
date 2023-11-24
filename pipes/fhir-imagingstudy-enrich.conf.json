@@ -13,6 +13,58 @@
         ["add", "rdf:type",
           ["ni", "fhir", "_S.resourceType"]
         ],
+        ["add", "encounter-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.encounter.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.encounter.reference"]
+            ]
+          ]
+        ],
+        ["add", "endpoint-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.endpoint.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.endpoint.reference"]
+            ]
+          ]
+        ],
+        ["add", "performer-ni",
+          ["values",
+            ["apply", "performer-actor", "_S.series.performer"]
+          ]
+        ],
+        ["add", "procedure-ni",
+          ["values",
+            ["apply", "procedure", "_S.procedure"]
+          ]
+        ],
+        ["add", "referrer-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.referrer.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.referrer.reference"]
+            ]
+          ]
+        ],
         ["add", "subject-ni",
           ["ni",
             ["concat", "fhir-",
@@ -26,6 +78,41 @@
               ["split", "/", "_S.subject.reference"]
             ]
           ]
+        ]
+      ],
+      "performer-actor": [
+        ["add", "tmp-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.actor.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.actor.reference"]
+            ]
+          ]
+        ]
+      ],
+      "procedure": [
+        ["add", "tmp-ni",
+          ["ni",
+            ["concat", "fhir-",
+              ["lower",
+                ["first",
+                  ["split", "/", "_S.reference.reference"]
+                ]
+              ]
+            ],
+            ["last",
+              ["split", "/", "_S.reference.reference"]
+            ]
+          ]
+        ],
+        ["filter",
+          ["is-not-null", "_T.tmp-ni"]
         ]
       ]
     }
